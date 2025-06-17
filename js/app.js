@@ -1,5 +1,6 @@
 // js/app.js
-
+localStorage.removeItem('train7k_week');
+localStorage.removeItem('train7k_day');
 let dataSeances = [];
 let dataForce = [];
 let semaineCourante = Number(localStorage.getItem('train7k_week')) || 0;
