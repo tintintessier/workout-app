@@ -6,45 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Train7k – Entraînement</title>
   <link rel="stylesheet" href="css/style.css">
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script src="js/app.js" defer></script>
 </head>
 <body>
   <header class="header">
-    <h1>🏃‍♂️ Train7k</h1>
+    <div class="logo">Train7k</div>
+    <nav class="top-nav">
+      <button id="btn-seances" class="nav-btn active">Séances</button>
+      <button id="btn-graph" class="nav-btn">Progression</button>
+      <button id="btn-force" class="nav-btn">FORCE</button>
+    </nav>
   </header>
-
-  <main class="container">
-    <section class="week-selector">
-      <button id="prev-week">« Semaine précédente</button>
-      <span id="current-week-label">Semaine 1</span>
-      <button id="next-week">Semaine suivante »</button>
-    </section>
-
+  <main class="main">
     <section id="seances" class="tab active">
-      <h2>Vos séances de la semaine</h2>
-      <div id="seance-cards" class="cards"></div>
+      <h2 class="section-title">Séances – Semaine <span id="current-week">1</span></h2>
+      <div class="week-controls">
+        <button id="prev-week" class="ctrl-btn">« Précédente</button>
+        <button id="next-week" class="ctrl-btn">Suivante »</button>
+      </div>
+      <div id="seance-cards" class="cards-grid"></div>
     </section>
-
     <section id="graph" class="tab">
-      <h2>Graphique de progression</h2>
-      <canvas id="progressChart"></canvas>
+      <h2 class="section-title">Progression</h2>
+      <div class="chart-container">
+        <canvas id="progressChart"></canvas>
+      </div>
     </section>
-
     <section id="force" class="tab">
-      <h2>Entraînements FORCE</h2>
-      <div id="force-cards" class="cards"></div>
+      <h2 class="section-title">Entraînements FORCE</h2>
+      <div id="force-cards" class="cards-grid"></div>
     </section>
   </main>
-
-  <footer class="footer">
-    <nav>
-      <button id="btn-seances">Séances</button>
-      <button id="btn-graph">Progression</button>
-      <button id="btn-force">FORCE</button>
-    </nav>
-  </footer>
-
-  <script src="js/app.js" defer></script>
 </body>
 </html>
