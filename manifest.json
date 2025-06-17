@@ -1,0 +1,20 @@
+{
+  "short_name": "Train7k",
+  "name": "Train7k – Préparation Forces can.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#0d47a1",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
