@@ -29,6 +29,9 @@ main {
   overflow: hidden;
   position: relative;
   padding-bottom: 56px; /* ajuster si ta nav fait plus ou moins de 56 px de haut */
+    display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 /* Séances – carte full-page */
 .day-nav {
@@ -48,10 +51,12 @@ main {
 }
 #daily-card-container {
   flex: 1;
+  min-height: 0; /* indispensable pour que flex fonctionne sur mobile */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1em;
+  background: var(--bg);
 }
 .session-card {
   width: 100%;
