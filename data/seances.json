@@ -1,9 +1,32 @@
 [
-  {"type":"marche","description":"Marche rapide 4 km","exercices":[],"poids":"—"},
-  {"type":"marche-poids","description":"Marche 5 km","exercices":[],"poids":"10 kg"},
-  {"type":"gym","description":"Renforcement bas du corps","exercices":["Squats 3×12","Fentes marchées 3×10","Pompes 2×15"],"poids":"—"},
-  {"type":"course","description":"1 min course / 2 min marche ×6","exercices":[],"poids":"—"},
-  {"type":"marche-poids","description":"Marche 6 km","exercices":[],"poids":"12 kg"},
-  {"type":"gym","description":"Renforcement haut du corps","exercices":["Pompes 3×20","Rowing haltères 3×10","Planche 3×45s"],"poids":"—"},
-  {"type":"course","description":"3 min course / 1 min marche ×5","exercices":[],"poids":"—"}
+  [
+    { "type": "course", "description": "1 min course / 2 min marche × 6" },
+    { "type": "course", "description": "2 min course / 2 min marche × 5" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ],
+  [
+    { "type": "course", "description": "3 min course / 2 min marche × 4" },
+    { "type": "gym",    "description": "Séance gym FORCE – soulevés, fentes, planche" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ],
+  [
+    { "type": "course", "description": "5 min course / 3 min marche × 3" },
+    { "type": "course", "description": "8 min course / 2 min marche × 2" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ],
+  [
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk" },
+    { "type": "course", "description": "12 min course / 2 min marche × 2" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ],
+  [
+    { "type": "course", "description": "15 min course / 1 min marche" },
+    { "type": "gym",    "description": "Séance gym FORCE – soulevé de terre, pompes quotidiennes" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ],
+  [
+    { "type": "course", "description": "20 min course continue" },
+    { "type": "course", "description": "7 km course finale !" },
+    { "type": "repos",  "description": "Repos actif ou étirements" }
+  ]
 ]
