@@ -3,25 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Train7k – Séances</title>
+  <title>Train7k</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-<script src="js/app.js" defer></script>
+  <script src="js/app.js" defer></script>
 </head>
 <body>
   <header><h1>Train7k</h1></header>
+
   <main>
+    <!-- CAROUSEL JOURNALIER -->
     <section id="tab-seances" class="tab active">
-      <div class="week-nav">
-        <button id="prev-week">« Précédent</button>
-        <span id="week-label">Semaine 1</span>
-        <button id="next-week">Suivant »</button>
+      <div class="carousel-nav">
+        <button id="prev-day">‹</button>
+        <span id="day-label">Jour 1</span>
+        <button id="next-day">›</button>
       </div>
-      <ul id="seance-list"></ul>
+      <div id="session-container"></div>
     </section>
-   <section id="tab-progression" class="tab">
-  <canvas id="progressChart"></canvas>
-</section>
+
+    <!-- PROGRESSION -->
+    <section id="tab-progression" class="tab">
+      <canvas id="progressChart"></canvas>
+    </section>
+
+    <!-- FORCE -->
     <section id="tab-force" class="tab">
       <h2>Test FORCE (Homme 24 ans)</h2>
       <table id="force-table">
@@ -32,10 +39,20 @@
       </table>
     </section>
   </main>
+
   <nav class="bottom-nav">
     <button data-tab="seances" class="active">Séances</button>
     <button data-tab="progression">Progression</button>
     <button data-tab="force">FORCE</button>
   </nav>
+
+  <script>
+    // ENREGISTRE LE SERVICE WORKER
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('SW enregistré'))
+        .catch(() => console.log('Échec SW'));
+    }
+  </script>
 </body>
 </html>
