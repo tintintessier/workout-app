@@ -13,14 +13,14 @@
   <header><h1>Train7k</h1></header>
 
   <main>
-    <!-- CAROUSEL JOURNALIER -->
+    <!-- SÉANCES : carte quotidienne full-page -->
     <section id="tab-seances" class="tab active">
-      <div class="carousel-nav">
-        <button id="prev-day">‹</button>
+      <div class="day-nav">
+        <button id="prev-day">«</button>
         <span id="day-label">Jour 1</span>
-        <button id="next-day">›</button>
+        <button id="next-day">»</button>
       </div>
-      <div id="session-container"></div>
+      <div id="daily-card-container"></div>
     </section>
 
     <!-- PROGRESSION -->
@@ -47,11 +47,8 @@
   </nav>
 
   <script>
-    // ENREGISTRE LE SERVICE WORKER
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('SW enregistré'))
-        .catch(() => console.log('Échec SW'));
+      navigator.serviceWorker.register('service-worker.js');
     }
   </script>
 </body>
