@@ -1,17 +1,20 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Train7k – Séances</title>
+  <title>Train7k – Entraînement</title>
   <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
     <h1>🏃‍♂️ Train7k</h1>
     <nav>
-      <button onclick="showTab('seances')">Séances</button>
-      <button onclick="showTab('recettes')">Recettes</button>
+      <button onclick="showTab('seances')">📅 Séances</button>
+      <button onclick="showTab('graph')">📈 Progression</button>
     </nav>
   </header>
   <main>
@@ -19,43 +22,11 @@
       <h2>Vos séances</h2>
       <ul id="seance-list"></ul>
     </section>
-    <section id="recettes" class="tab">
-      <h2>Recettes suggérées</h2>
-      <ul id="recette-list"></ul>
+    <section id="graph" class="tab">
+      <h2>Graphique de progression</h2>
+      <canvas id="progressChart"></canvas>
     </section>
   </main>
-  <script>
-    function showTab(id) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    // Plan de secours si le fetch échoue
-    const seancesParDefaut = [
-      { type: 'course', description: '1 km course / 1 km marche' },
-      { type: 'repos', description: 'Repos actif ou étirements' },
-      { type: 'gym', description: 'Séance gym Force: squats, fentes, planche' }
-    ];
-
-    fetch('data/seances.json')
-      .then(r => {
-        if (!r.ok) throw new Error('Fichier non trouvé');
-        return r.json();
-      })
-      .then(data => afficherSeances(data))
-      .catch(() => afficherSeances(seancesParDefaut));
-
-    function afficherSeances(data) {
-      const ul = document.getElementById('seance-list');
-      ul.innerHTML = '';
-      data.forEach((s, i) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>Jour ${i+1}</strong> [${s.type}] – ${s.description}`;
-        ul.appendChild(li);
-      });
-    }
-
-    // Même principe pour les recettes...
-  </script>
+  <script src="js/app.js"></script>
 </body>
 </html>
