@@ -1,107 +1,62 @@
 :root {
-  --bg: #f7f9fc;
-  --fg: #22303c;
+  --bg: #fafbfc;
+  --fg: #2b3a42;
   --primary: #0d47a1;
   --card: #ffffff;
 }
+/* reset */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Roboto', sans-serif;
   background: var(--bg);
   color: var(--fg);
-  display: flex; flex-direction: column;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
-header {
-  background: var(--primary);
-  color: #fff;
-  padding: 1em;
-  text-align: center;
-}
-main {
-  flex: 1; overflow-y: auto;
+header { background: var(--primary); color: #fff; padding: 1em; text-align: center; }
+main { flex: 1; overflow: hidden; position: relative; }
+
+/* Carousel jour */
+.carousel-nav {
+  display: flex; justify-content: space-between; align-items: center;
   padding: 1em;
 }
-.week-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1em;
+.carousel-nav button {
+  background: none; border: none; font-size: 1.5em; color: var(--primary);
 }
-.week-nav button {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: 0.5em 1em;
-  border-radius: 4px;
-  cursor: pointer;
+#session-container {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; padding: 1em;
 }
-.tab { display: none; }
-.tab.active { display: block; }
-
-/* Liste séances */
-#seance-list {
-  list-style: none;
+.session-card {
+  flex: 0 0 80%; scroll-snap-align: start;
+  background: var(--card); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 1em; margin-right: 1em; position: relative;
 }
-#seance-list li {
-  display: flex;
-  align-items: center;
-  background: var(--card);
-  margin-bottom: 0.75em;
-  padding: 0.75em;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-#seance-list input[type="checkbox"] {
-  margin-right: 0.75em;
-  width: 1.2em; height: 1.2em;
+.session-card h3 { margin-bottom: .5em; }
+.session-card button { 
+  background: var(--primary); color: #fff; border: none;
+  padding: .5em 1em; border-radius: 4px; cursor: pointer;
+  position: absolute; bottom: 1em; right: 1em;
 }
 
-/* Graphique Progression */
-#progressChart {
-  max-width: 100%;
-  background: var(--card);
-  padding: 1em;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
+/* Progression */
+#progressChart { display: block; width: 100% !important; height: 250px !important;
+  background: var(--card); margin: 1em; border-radius: 8px; }
 
-/* Tableau FORCE */
-#force-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1em;
-}
-#force-table th,
-#force-table td {
-  border: 1px solid #ddd;
-  padding: 0.5em;
-  text-align: center;
-}
-#force-table th {
-  background: var(--primary);
-  color: #fff;
-}
+/* FORCE */
+#force-table { width:100%; border-collapse: collapse; margin: 1em; }
+#force-table th, #force-table td { border: 1px solid #ddd; padding: .5em; text-align:center; }
+#force-table th { background: var(--primary); color: #fff; }
 
-/* Navigation fixe */
+/* Nav fixe */
 .bottom-nav {
   display: flex; justify-content: space-around;
   background: #fff; border-top: 1px solid #ccc;
 }
 .bottom-nav button {
-  flex: 1;
-  padding: 0.75em;
-  background: none; border: none;
-  color: var(--primary);
-  font-weight: bold;
-  cursor: pointer;
+  flex:1; padding: .75em; background:none; border:none;
+  color: var(--primary); font-weight:bold; cursor:pointer;
 }
-.bottom-nav button.active {
-  background: rgba(13,71,161,0.1);
-}
-
-#progressChart {
-  display: block;
-  width: 100% !important;
-  height: 250px !important;
-}
+.bottom-nav button.active { background: rgba(13,71,161,0.1); }
