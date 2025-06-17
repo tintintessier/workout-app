@@ -3,50 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Train7k – Entraînement</title>
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Chart.js pour l'onglet Progression -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <title>Debug Train7k</title>
+  <style>
+    body { font-family: sans-serif; background: #f7f9fc; color: #22303c; padding: 1em; }
+    header { background: #0d47a1; color: #fff; padding: .5em; text-align: center; }
+    .week-nav { display:flex; justify-content:space-between; margin:1em 0; }
+    .session-card { background:#fff; padding:.75em; margin-bottom:.5em; border-radius:6px; box-shadow:0 1px 3px rgba(0,0,0,0.1); display:flex; align-items:center; }
+    .session-card input { margin-right:.75em; transform:scale(1.2); }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Train7k</h1>
-  </header>
+  <header><h1>Debug Train7k</h1></header>
+  <div class="week-nav">
+    <button id="prev-week">« Précédent</button>
+    <span id="week-label">Semaine 1</span>
+    <button id="next-week">Suivant »</button>
+  </div>
+  <ul id="seance-list"></ul>
 
-  <main>
-    <!-- SÉANCES -->
-    <section id="tab-seances" class="tab active">
-      <div class="week-nav">
-        <button id="prev-week">« Précédent</button>
-        <span id="week-label">Semaine 1</span>
-        <button id="next-week">Suivant »</button>
-      </div>
-      <ul id="seance-list"></ul>
-    </section>
+  <script>
+    // **Données embarquées** pour le test
+    const seancesParSemaine = [
+      [ {type:'course',description:'Test S1-1'}, {type:'repos',description:'Test S1-2'} ],
+      [ {type:'course',description:'Test S2-1'}, {type:'gym',description:'Test S2-2'} ]
+    ];
+    let semaineCourante = 0;
+    const totalSemaines = seancesParSemaine.length;
 
-    <!-- PROGRESSION -->
-    <section id="tab-progression" class="tab">
-      <canvas id="progressChart"></canvas>
-    </section>
+    document.getElementById('prev-week').addEventListener('click', ()=>{ if(semaineCourante>0){ semaineCourante--; render(); }});
+    document.getElementById('next-week').addEventListener('click', ()=>{ if(semaineCourante<totalSemaines-1){ semaineCourante++; render(); }});
 
-    <!-- FORCE -->
-    <section id="tab-force" class="tab">
-      <h2>Test FORCE (Homme 24 ans)</h2>
-      <table id="force-table">
-        <thead>
-          <tr><th>Épreuve</th><th>Bronze</th><th>Argent</th><th>Or</th><th>Platine</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
+    function render(){
+      document.getElementById('week-label').textContent = `Semaine ${semaineCourante+1}`;
+      const ul = document.getElementById('seance-list');
+      ul.innerHTML = '';
+      seancesParSemaine[semaineCourante].forEach((s,i)=>{
+        const li = document.createElement('li');
+        li.className = 'session-card';
+        li.innerHTML = `
+          <input type="checkbox" id="c${semaineCourante}_${i}">
+          <label for="c${semaineCourante}_${i}">${s.type.toUpperCase()} – ${s.description}</label>
+        `;
+        ul.appendChild(li);
+      });
+    }
 
-  <!-- NAVIGATION FIXE EN BAS -->
-  <nav class="bottom-nav">
-    <button data-tab="seances">Séances</button>
-    <button data-tab="progression">Progression</button>
-    <button data-tab="force">FORCE</button>
-  </nav>
+    // Lancer l'affichage initial
+    render();
+  </script>
 </body>
 </html>
