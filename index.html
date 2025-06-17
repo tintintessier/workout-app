@@ -10,7 +10,9 @@
   <script src="js/app.js" defer></script>
 </head>
 <body>
-  <header><h1>Train7k</h1></header>
+  <header>
+    <h1>Train7k</h1>
+  </header>
 
   <main>
     <!-- SÉANCES : carte quotidienne full-page -->
@@ -33,7 +35,13 @@
       <h2>Test FORCE (Homme 24 ans)</h2>
       <table id="force-table">
         <thead>
-          <tr><th>Épreuve</th><th>Bronze</th><th>Argent</th><th>Or</th><th>Platine</th></tr>
+          <tr>
+            <th>Épreuve</th>
+            <th>Bronze</th>
+            <th>Argent</th>
+            <th>Or</th>
+            <th>Platine</th>
+          </tr>
         </thead>
         <tbody></tbody>
       </table>
@@ -47,6 +55,7 @@
   </nav>
 
   <script>
+    // Enregistre le service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
