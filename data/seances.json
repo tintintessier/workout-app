@@ -1,74 +1,34 @@
+/* data/seances.json */
 [
-  {
-    "type": "course",
-    "description": "1 min course / 2 min marche x6"
-  },
-  {
-    "type": "course",
-    "description": "2 min course / 2 min marche x5"
-  },
-  {
-    "type": "repos",
-    "description": "Repos actif"
-  },
-  {
-    "type": "course",
-    "description": "3 min course / 2 min marche x4"
-  },
-  {
-    "type": "course",
-    "description": "5 min course / 3 min marche x3"
-  },
-  {
-    "type": "repos",
-    "description": "Repos actif"
-  },
-  {
-    "type": "course",
-    "description": "8 min course / 2 min marche x2"
-  },
-  {
-    "type": "course",
-    "description": "10 min course / 2 min marche x2"
-  },
-  {
-    "type": "repos",
-    "description": "Repos actif"
-  },
-  {
-    "type": "course",
-    "description": "12 min course / 2 min marche x2"
-  },
-  {
-    "type": "course",
-    "description": "15 min course / 1 min marche"
-  },
-  {
-    "type": "repos",
-    "description": "Repos actif"
-  },
-  {
-    "type": "course",
-    "description": "20 min course continue"
-  },
-  {
-    "type": "gym",
-    "description": "Séance de gym"
-  },
-  {
-    "type": "repos",
-    "description": "Repos actif"
-  },
-  {
-    "type": "course",
-    "description": "25 min course"
-  },
-  {
-    "type": "gym",
-    "description": "Séance de gym + 10 min course"
-  },
-  {
-    "type": "course",
-    "description": "7 km course finale !"
-  }
+  {"type":"marche","description":"Marche rapide 4 km","exercices":[],"poids":"—"},
+  {"type":"marche-poids","description":"Marche 5 km","poids":"10 kg","exercices":[]},
+  {"type":"gym","description":"Renfo bas du corps","poids":"—","exercices":["Squats 3×12","Fentes marchées 3×10","Pompes 2×15"]},
+
+  {"type":"course","description":"1 min course / 2 min marche ×6","exercices":[]},
+  {"type":"marche-poids","description":"Marche 6 km","poids":"12 kg","exercices":[]},
+  {"type":"gym","description":"Renfo haut du corps","poids":"—","exercices":["Pompes 3×20","Rowing haltères 3×10","Planche 3×45s"]},
+
+  {"type":"course","description":"3 min course / 1 min marche ×5","exercices":[]},
+  {"type":"marche-poids","description":"Marche 8 km","poids":"15 kg","exercices":[]},
+  {"type":"gym","description":"Core & Gainage","poids":"—","exercices":["Planche 3×1min","Crunchs 3×20","Dips 3×10"]},
+
+  {"type":"course","description":"5 min course / 1 min marche ×4","exercices":[]},
+  {"type":"marche-poids","description":"Marche 10 km","poids":"15 kg","exercices":[]},
+  {"type":"gym","description":"Test deadlift","poids":"—","exercices":["Soulevé de terre 3×8","Farmer's walk 3×40m","Pompes 3×20"]},
+
+  {"type":"course","description":"10 min course continue","exercices":[]},
+  {"type":"marche-poids","description":"Marche 5 km","poids":"—","exercices":[]},
+  {"type":"gym","description":"Test force bras","poids":"—","exercices":["Traction horizontale 3×10","Pompes 4×15","Planche latérale 3×30s"]},
+
+  {"type":"course","description":"Marche rapide 5 km","exercices":[]},
+  {"type":"course","description":"Course finale 7 km","exercices":[]},
+  {"type":"repos","description":"Repos complet","exercices":[]}
+]
+
+/* data/force.json */
+[
+  {"exercice":"Soulevé de charge (sandbag) 20 kg","details":"30 répétitions en <3m"},
+  {"exercice":"Traînée de traîneau 40 kg","details":"40m en <51s"},
+  {"exercice":"Saut horizontal","details":"Atteindre ≥1,29 m"},
+  {"exercice":"Course-navette 20m chargé","details":"5m21s max"}
 ]
