@@ -1,32 +1,56 @@
 [
-  [
-    { "type": "course", "description": "1 min course / 2 min marche × 6" },
-    { "type": "course", "description": "2 min course / 2 min marche × 5" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+  [ 
+    { "type": "course", "description": "1 min course / 2 min marche × 6\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – soulevés, fentes, planche\nPompes × 20" },
+    { "type": "course", "description": "2 min course / 2 min marche × 5\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk\nPompes × 20" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ],
   [
-    { "type": "course", "description": "3 min course / 2 min marche × 4" },
-    { "type": "gym",    "description": "Séance gym FORCE – soulevés, fentes, planche" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+    { "type": "course", "description": "3 min course / 2 min marche × 4\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – soulevé de terre, tirage\nPompes × 20" },
+    { "type": "course", "description": "5 min course / 3 min marche × 3\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – sprint navette, gainage\nPompes × 20" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ],
   [
-    { "type": "course", "description": "5 min course / 3 min marche × 3" },
-    { "type": "course", "description": "8 min course / 2 min marche × 2" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+    { "type": "course", "description": "5 min course / 3 min marche × 3\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – deadlift, pompes\nPompes × 20" },
+    { "type": "course", "description": "8 min course / 2 min marche × 2\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk\nPompes × 20" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ],
   [
-    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk" },
-    { "type": "course", "description": "12 min course / 2 min marche × 2" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk\nPompes × 20" },
+    { "type": "course", "description": "12 min course / 2 min marche × 2\nPompes quotidiennes × 30" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – deadlift, sprint navette\nPompes × 20" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ],
   [
-    { "type": "course", "description": "15 min course / 1 min marche" },
-    { "type": "gym",    "description": "Séance gym FORCE – soulevé de terre, pompes quotidiennes" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+    { "type": "course", "description": "15 min course / 1 min marche\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – soulevé de terre, pompes\nPompes × 20" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk\nPompes × 20" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ],
   [
-    { "type": "course", "description": "20 min course continue" },
-    { "type": "course", "description": "7 km course finale !" },
-    { "type": "repos",  "description": "Repos actif ou étirements" }
+    { "type": "course", "description": "20 min course continue\nPompes quotidiennes × 30" },
+    { "type": "course", "description": "7 km course finale !\nPompes quotidiennes × 30" },
+    { "type": "repos",  "description": "Repos actif ou étirements\nPompes quotidiennes × 30" },
+    { "type": "gym",    "description": "Séance gym FORCE – deadlift, sprint navette\nPompes × 20" },
+    { "type": "gym",    "description": "Séance gym FORCE – traînée, farmer’s walk\nPompes × 20" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" },
+    { "type": "pompes", "description": "Pompes quotidiennes × 30" }
   ]
 ]
