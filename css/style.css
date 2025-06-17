@@ -19,16 +19,7 @@ body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--te
 .card p { font-size: 0.95rem; margin-bottom: 0.5rem; }
 .card .exercise-list { list-style: none; padding-left: 0; margin-bottom: 0.5rem; }
 .card .exercise-list li { margin-left: 0; margin-bottom: 0.25rem; }
-.card .check{
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent);
-  border-radius: 4px;
-  cursor: pointer;
-}
+.card .check { position: absolute; top: 0.75rem; right: 0.75rem; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 4px; cursor: pointer; }
 .card.done { opacity: 0.6; }
 .chart-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
 .tab { display: none; }
