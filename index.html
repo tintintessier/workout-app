@@ -1,44 +1,52 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Train7k – Entraînement</title>
   <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js pour l'onglet Progression -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">Train7k</div>
+  <header>
+    <h1>Train7k</h1>
   </header>
-  <main class="main">
-    <section id="seances" class="tab active">
-      <h2 class="section-title">Séances – Semaine <span id="current-week">1</span></h2>
-      <div class="week-controls">
-        <button id="prev-week" class="ctrl-btn">« Précédente</button>
-        <button id="next-week" class="ctrl-btn">Suivante »</button>
+
+  <main>
+    <!-- SÉANCES -->
+    <section id="tab-seances" class="tab active">
+      <div class="week-nav">
+        <button id="prev-week">« Précédent</button>
+        <span id="week-label">Semaine 1</span>
+        <button id="next-week">Suivant »</button>
       </div>
-      <div id="seance-cards" class="cards-grid"></div>
+      <ul id="seance-list"></ul>
     </section>
-    <section id="graph" class="tab">
-      <h2 class="section-title">Progression</h2>
-      <div class="chart-container">
-        <canvas id="progressChart"></canvas>
-      </div>
+
+    <!-- PROGRESSION -->
+    <section id="tab-progression" class="tab">
+      <canvas id="progressChart"></canvas>
     </section>
-    <section id="force" class="tab">
-      <h2 class="section-title">Entraînements FORCE</h2>
-      <div id="force-cards" class="cards-grid"></div>
+
+    <!-- FORCE -->
+    <section id="tab-force" class="tab">
+      <h2>Test FORCE (Homme 24 ans)</h2>
+      <table id="force-table">
+        <thead>
+          <tr><th>Épreuve</th><th>Bronze</th><th>Argent</th><th>Or</th><th>Platine</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </section>
   </main>
-  <footer class="footer">
-    <nav class="bottom-nav">
-      <button id="btn-seances" class="nav-btn active">Séances</button>
-      <button id="btn-graph" class="nav-btn">Progression</button>
-      <button id="btn-force" class="nav-btn">FORCE</button>
-    </nav>
-  </footer>
+
+  <!-- NAVIGATION FIXE EN BAS -->
+  <nav class="bottom-nav">
+    <button data-tab="seances">Séances</button>
+    <button data-tab="progression">Progression</button>
+    <button data-tab="force">FORCE</button>
+  </nav>
 </body>
 </html>
