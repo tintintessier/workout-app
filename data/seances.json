@@ -1,4 +1,4 @@
-/* data/seances.json */
+
 [
   {"type":"marche","description":"Marche rapide 4 km","exercices":[],"poids":"—"},
   {"type":"marche-poids","description":"Marche 5 km","poids":"10 kg","exercices":[]},
@@ -23,12 +23,4 @@
   {"type":"course","description":"Marche rapide 5 km","exercices":[]},
   {"type":"course","description":"Course finale 7 km","exercices":[]},
   {"type":"repos","description":"Repos complet","exercices":[]}
-]
-
-/* data/force.json */
-[
-  {"exercice":"Soulevé de charge (sandbag) 20 kg","details":"30 répétitions en <3m"},
-  {"exercice":"Traînée de traîneau 40 kg","details":"40m en <51s"},
-  {"exercice":"Saut horizontal","details":"Atteindre ≥1,29 m"},
-  {"exercice":"Course-navette 20m chargé","details":"5m21s max"}
 ]
