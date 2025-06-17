@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Train7k</title>
+  <title>Train7k – Test Onglets & Journée</title>
   <style>
     :root {
       --bg: #fafbfc;
@@ -12,18 +12,12 @@
       --card: #ffffff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* Onglets masqués par défaut */
-    .tab { display: none; }
-    .tab.active { display: block; }
-
     body, html {
       height: 100%;
       font-family: sans-serif;
       background: var(--bg);
       color: var(--fg);
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
     }
     header {
       background: var(--primary);
@@ -34,36 +28,27 @@
     main {
       flex: 1;
       overflow: auto;
-      position: relative;
-      padding-bottom: 60px; /* espace pour nav fixe */
+      padding-bottom: 60px; /* espace pour nav */
     }
-
-    /* Section Séances */
+    /* Onglets */
+    .tab { display: none; }
+    .tab.active { display: block; }
+    /* Séances full-page */
     .day-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #fff;
-      padding: 1em;
+      display: flex; justify-content: center; align-items: center;
+      background: #fff; padding: 1em;
     }
     .day-nav button {
-      background: none;
-      border: none;
-      font-size: 1.5em;
-      color: var(--primary);
-      padding: 0 1em;
-      cursor: pointer;
+      background: none; border: none;
+      font-size: 1.5em; color: var(--primary);
+      padding: 0 1em; cursor: pointer;
     }
     #daily-card-container {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: flex; justify-content: center; align-items: center;
       padding: 1em;
     }
     .session-card {
-      width: 100%;
-      max-width: 400px;
+      width: 100%; max-width: 400px;
       background: var(--card);
       padding: 1.5em;
       border-radius: 8px;
@@ -71,77 +56,37 @@
       position: relative;
     }
     .session-card button {
-      position: absolute;
-      bottom: 1em;
-      right: 1em;
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 0.5em 1em;
-      border-radius: 4px;
-      cursor: pointer;
+      position: absolute; bottom: 1em; right: 1em;
+      background: var(--primary); color: #fff;
+      border: none; padding: 0.5em 1em;
+      border-radius: 4px; cursor: pointer;
     }
-
-    /* Section Progression */
-    #progressChart {
-      width: 100% !important;
-      height: 250px !important;
-      background: var(--card);
-      margin: 1em;
-      border-radius: 8px;
+    /* Progression & FORCE (contenu de test) */
+    #progression, #force {
+      padding: 1em;
     }
-
-    /* Section FORCE */
-    #force-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1em;
-    }
-    #force-table th,
-    #force-table td {
-      border: 1px solid #ddd;
-      padding: 0.5em;
-      text-align: center;
-    }
-    #force-table th {
-      background: var(--primary);
-      color: #fff;
-    }
-
     /* Nav fixe */
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background: #fff;
-      border-top: 1px solid #ccc;
-      z-index: 1000;
+      position: fixed; bottom: 0; left: 0; width: 100%;
+      display: flex; justify-content: space-around;
+      background: #fff; border-top: 1px solid #ccc;
     }
     .bottom-nav button {
-      flex: 1;
-      padding: 0.75em;
-      background: none;
-      border: none;
-      color: var(--primary);
-      font-weight: bold;
+      flex: 1; padding: 0.75em;
+      background: none; border: none;
+      color: var(--primary); font-weight: bold;
       cursor: pointer;
     }
     .bottom-nav button.active {
       background: rgba(13,71,161,0.1);
     }
   </style>
-  <!-- Chart.js depuis CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header><h1>Train7k</h1></header>
-
   <main>
     <!-- Séances -->
-    <section id="tab-seances" class="tab active">
+    <section id="seances" class="tab active">
       <div class="day-nav">
         <button id="prev-day">«</button>
         <span id="day-label">Semaine 1 • Jour 1</span>
@@ -149,79 +94,12 @@
       </div>
       <div id="daily-card-container"></div>
     </section>
-
     <!-- Progression -->
-    <section id="tab-progression" class="tab">
-      <canvas id="progressChart"></canvas>
+    <section id="progression" class="tab">
+      <h2>Progression</h2>
+      <p>(ici ton bar-chart ou % complété)</p>
     </section>
-
     <!-- FORCE -->
-    <section id="tab-force" class="tab">
-      <h2>Test FORCE (Homme 24 ans)</h2>
-      <table id="force-table">
-        <thead>
-          <tr>
-            <th>Épreuve</th><th>Bronze</th><th>Argent</th><th>Or</th><th>Platine</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
-
-  <nav class="bottom-nav">
-    <button data-tab="seances" class="active">Séances</button>
-    <button data-tab="progre﻿ssion">Progression</button>
-    <button data-tab="force">FORCE</button>
-  </nav>
-
-  <script>
-    // Données d'exemple — remplace par fetch() vers data/*.json dès que c'est OK
-    const seancesParSemaine = [
-      [{type:'course',description:'1 min course / 2 min marche × 6'}],
-      [{type:'course',description:'3 min course / 2 min marche × 4'}],
-      [{type:'course',description:'5 min course / 3 min marche × 3'}],
-      [{type:'course',description:'12 min course / 2 min marche × 2'}],
-      [{type:'course',description:'15 min course / 1 min marche'}],
-      [{type:'course',description:'20 min course continue'}]
-    ];
-    const forceData = [
-      {
-        epreuve:'Soulevé de charge',
-        niveaux:{
-          Bronze:'30 levées en ≤ 3 min 30 s',
-          Argent:'30 levées en ≤ 3 min',
-          Or:'30 levées en ≤ 2 min 30 s',
-          Platine:'30 levées en ≤ 2 min'
-        }
-      }
-    ];
-
-    let semaine = 0, jour = 0, chart;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // onglets
-      document.querySelectorAll('.bottom-nav button').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-          document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-          document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active');
-          if(btn.dataset.tab==='progression') chart.update();
-        });
-      });
-
-      // navigation jour
-      document.getElementById('prev-day').addEventListener('click', ()=> changeDay(-1));
-      document.getElementById('next-day').addEventListener('click', ()=> changeDay(1));
-
-      // initialiser Chart.js
-      const ctx = document.getElementById('progressChart').getContext('2d');
-      chart = new Chart(ctx, {
-        type:'bar',
-        data:{
-          labels: seancesParSemaine.map((_,i)=>`S${i+1}`),
-          datasets:[{ label:'% complété',
-            data: Array(seancesParSemaine.length).fill(0),
-            backgroundColor:'rgba(13,71,161,0.6)' }]
-        },
+    <section id="force" class="tab">
+      <h2>Test FORCE</h2>
+      <p>(ici
