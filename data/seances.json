@@ -1,0 +1,4 @@
+[
+  { "jour": 1, "type": "marche", "description": "5 min marche rapide, 1 min course x5" },
+  { "jour": 2, "type": "repos", "description": "Repos actif ou étirements" }
+]
