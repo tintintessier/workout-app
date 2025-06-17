@@ -8,30 +8,41 @@ document.addEventListener('DOMContentLoaded', () => {
     navBtns.forEach(b => b.classList.toggle('active', b.id === 'btn-' + name));
   }
 
-  let currentWeek = 1, weeksCount = 6, perWeek = 7;
+  // Gestion de la semaine
+  let currentWeek = parseInt(localStorage.getItem('train7k_week')) || 1;
+  const weeksCount = 6, perWeek = 7;
+  document.getElementById('current-week').textContent = currentWeek;
   document.getElementById('prev-week').addEventListener('click', () => changeWeek(-1));
   document.getElementById('next-week').addEventListener('click', () => changeWeek(1));
   function changeWeek(delta) {
     currentWeek = Math.max(1, Math.min(weeksCount, currentWeek + delta));
+    localStorage.setItem('train7k_week', currentWeek);
     document.getElementById('current-week').textContent = currentWeek;
     renderSeances();
+    updateChart();
   }
 
-  let seances = [], completed = [], forceSessions = [];
-  fetch('data/seances.json').then(res => res.json()).then(data => { seances = data; completed = Array(seances.length).fill(false); renderSeances(); initChart(); });
+  let seances = [], completed = JSON.parse(localStorage.getItem('train7k_completed')) || [];
+  let forceSessions = [];
+  if (completed.length === 0) completed = Array(weeksCount * perWeek).fill(false);
+
+  fetch('data/seances.json').then(res => res.json()).then(data => { seances = data; renderSeances(); initChart(); });
   fetch('data/force.json').then(res => res.json()).then(data => { forceSessions = data; renderForce(); });
 
   function renderSeances() {
     const container = document.getElementById('seance-cards'); container.innerHTML = '';
     const start = (currentWeek - 1) * perWeek;
     seances.slice(start, start + perWeek).forEach((s, i) => {
+      const idx = start + i;
       const card = document.createElement('div'); card.className = 'card';
-      const title = document.createElement('h3'); title.textContent = `Jour ${start + i + 1} — ${capitalize(s.type)}`;
+      if (completed[idx]) card.classList.add('done');
+      const title = document.createElement('h3'); title.textContent = `Jour ${idx + 1} — ${capitalize(s.type)}`;
       const desc = document.createElement('p'); desc.textContent = s.description;
       const check = document.createElement('div'); check.className = 'check';
       check.addEventListener('click', () => {
+        completed[idx] = !completed[idx];
+        localStorage.setItem('train7k_completed', JSON.stringify(completed));
         card.classList.toggle('done');
-        completed[start + i] = !completed[start + i];
         updateChart();
       });
       card.append(check, title, desc);
@@ -40,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
         s.exercices.forEach(e => { const li = document.createElement('li'); li.textContent = e; list.append(li); });
         card.append(list);
       }
-      // Exercice quotidien push-ups
-      const bonus = document.createElement('p'); bonus.innerHTML = `<strong>Bonus :</strong> 20 pompes`; card.append(bonus);
+      const bonus = document.createElement('p'); bonus.innerHTML = `<strong>Bonus :</strong> 20 pompes`;
+      card.append(bonus);
       if (s.poids && s.poids !== '—') {
         const wt = document.createElement('p'); wt.innerHTML = `<strong>Poids recommandé :</strong> ${s.poids}`;
         card.append(wt);
@@ -54,7 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('force-cards'); container.innerHTML = '';
     forceSessions.forEach((f, i) => {
       const card = document.createElement('div'); card.className = 'card';
-      card.innerHTML = `<h3>${i + 1}. ${f.exercice}</h3><p>${f.details}</p>`;
+      card.innerHTML = `
+        <h3>${i + 1}. ${f.exercice}</h3>
+        <p><em>${f.details}</em></p>
+        <p>${f.description}</p>
+      `;
       container.appendChild(card);
     });
   }
@@ -67,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function calculateCompletion() {
     return Array.from({ length: weeksCount }, (_, w) => {
-      const done = seances.slice(w * perWeek, w * perWeek + perWeek).filter((_, i) => completed[w * perWeek + i]).length;
+      const start = w * perWeek;
+      const done = completed.slice(start, start + perWeek).filter(val => val).length;
       return Math.round(done / perWeek * 100);
     });
   }
