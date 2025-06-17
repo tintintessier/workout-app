@@ -1,3 +1,13 @@
+/* Masquer tous les onglets par défaut */
+.tab {
+  display: none;
+}
+
+/* Afficher uniquement l’onglet qui a la classe .active */
+.tab.active {
+  display: block;
+}
+
 :root {
   --bg: #fafbfc;
   --fg: #2b3a42;
