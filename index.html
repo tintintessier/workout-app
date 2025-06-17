@@ -10,19 +10,20 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
+  <header class="header">
     <h1>🏃‍♂️ Train7k</h1>
-    <nav>
-      <button id="btn-seances">📅 Séances</button>
-      <button id="btn-graph">📈 Progression</button>
-      <button id="btn-force">🏋️ FORCE</button>
-    </nav>
   </header>
 
-  <main>
+  <main class="container">
+    <section class="week-selector">
+      <button id="prev-week">« Semaine précédente</button>
+      <span id="current-week-label">Semaine 1</span>
+      <button id="next-week">Semaine suivante »</button>
+    </section>
+
     <section id="seances" class="tab active">
-      <h2>Vos séances (6 semaines)</h2>
-      <ul id="seance-list"></ul>
+      <h2>Vos séances de la semaine</h2>
+      <div id="seance-cards" class="cards"></div>
     </section>
 
     <section id="graph" class="tab">
@@ -32,9 +33,17 @@
 
     <section id="force" class="tab">
       <h2>Entraînements FORCE</h2>
-      <ul id="force-list"></ul>
+      <div id="force-cards" class="cards"></div>
     </section>
   </main>
+
+  <footer class="footer">
+    <nav>
+      <button id="btn-seances">Séances</button>
+      <button id="btn-graph">Progression</button>
+      <button id="btn-force">FORCE</button>
+    </nav>
+  </footer>
 
   <script src="js/app.js" defer></script>
 </body>
