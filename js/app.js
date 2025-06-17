@@ -10,12 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('prev-week').addEventListener('click', () => changeWeek(-1));
   document.getElementById('next-week').addEventListener('click', () => changeWeek(1));
   initChart();
-  fetch('data/seances.json')
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => {
-      seancesParSemaine = data;
-      renderSemaine();
-    })
+fetch('data/seances.json')
+  .then(r => r.ok ? r.json() : Promise.reject(r.status))
+  .then(data => {
+    seancesParSemaine = data;
+    renderSemaine();
+    // **ajouté** pour s'assurer que le graphique se met à jour
+    updateChart();
+  })
     .catch(err => {
       console.error('Erreur seances.json', err);
       document.getElementById('seance-list').innerHTML =
