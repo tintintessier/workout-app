@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     navBtns.forEach(b => b.classList.toggle('active', b.id === 'btn-' + name));
   }
 
-  // Gestion de la semaine
   let currentWeek = parseInt(localStorage.getItem('train7k_week')) || 1;
   const weeksCount = 6, perWeek = 7;
   document.getElementById('current-week').textContent = currentWeek;
@@ -46,17 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
         updateChart();
       });
       card.append(check, title, desc);
-      if (s.exercices && s.exercices.length) {
+      if (s.exercices) {
         const list = document.createElement('ul'); list.className = 'exercise-list';
         s.exercices.forEach(e => { const li = document.createElement('li'); li.textContent = e; list.append(li); });
         card.append(list);
       }
-      const bonus = document.createElement('p'); bonus.innerHTML = `<strong>Bonus :</strong> 20 pompes`;
-      card.append(bonus);
-      if (s.poids && s.poids !== '—') {
+      if (s.poids) {
         const wt = document.createElement('p'); wt.innerHTML = `<strong>Poids recommandé :</strong> ${s.poids}`;
         card.append(wt);
       }
+      const bonus = document.createElement('p'); bonus.innerHTML = `<strong>Bonus quotidien :</strong> 20 pompes`;
+      card.append(bonus);
       container.appendChild(card);
     });
   }
@@ -65,10 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('force-cards'); container.innerHTML = '';
     forceSessions.forEach((f, i) => {
       const card = document.createElement('div'); card.className = 'card';
+      let thresholds = '<ul class="exercise-list">';
+      for (const [grade, val] of Object.entries(f.thresholds)) {
+        thresholds += `<li><strong>${grade} :</strong> ${val}</li>`;
+      }
+      thresholds += '</ul>';
       card.innerHTML = `
         <h3>${i + 1}. ${f.exercice}</h3>
         <p><em>${f.details}</em></p>
         <p>${f.description}</p>
+        ${thresholds}
       `;
       container.appendChild(card);
     });
