@@ -2,15 +2,19 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Train7k</title>
   <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header><h1>Train7k</h1></header>
+  <header>
+    <h1>Train7k</h1>
+  </header>
 
   <main>
-    <!-- Séances full-page -->
+    <!-- Onglet SÉANCES -->
     <section id="tab-seances" class="tab active">
       <div class="day-nav">
         <button id="prev-day" type="button">«</button>
@@ -20,13 +24,13 @@
       <div id="daily-card-container"></div>
     </section>
 
-    <!-- Progression -->
+    <!-- Onglet PROGRESSION -->
     <section id="tab-progression" class="tab">
       <h2>Progression</h2>
       <canvas id="progressChart"></canvas>
     </section>
 
-    <!-- FORCE -->
+    <!-- Onglet FORCE -->
     <section id="tab-force" class="tab">
       <h2>Test FORCE (Homme 24 ans)</h2>
       <table id="force-table">
@@ -43,10 +47,9 @@
   <nav class="bottom-nav">
     <button type="button" data-tab="seances" class="active">Séances</button>
     <button type="button" data-tab="progression">Progression</button>
-    <button type="button" data-tab="force">Force</button>
+    <button type="button" data-tab="force">FORCE</button>
   </nav>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
