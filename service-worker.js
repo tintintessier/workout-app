@@ -2,11 +2,13 @@ const CACHE_NAME = 'train7k-v1';
 const URLS = [
   './',
   './index.html',
+  './manifest.json',
+  './service-worker.js',
   './css/style.css',
   './js/app.js',
   './data/seances.json',
   './data/force.json',
-  // ajoute ici tes icônes et assets nécessaires
+  // Ajoute ici tous les fichiers d'assets (icônes, audio, etc.)
 ];
 
 self.addEventListener('install', e => {
@@ -23,6 +25,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
+    caches.match(e.request).then(resp => resp || fetch(e.request))
   );
 });
