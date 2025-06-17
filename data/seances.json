@@ -1,26 +1,9 @@
-
 [
   {"type":"marche","description":"Marche rapide 4 km","exercices":[],"poids":"—"},
-  {"type":"marche-poids","description":"Marche 5 km","poids":"10 kg","exercices":[]},
-  {"type":"gym","description":"Renfo bas du corps","poids":"—","exercices":["Squats 3×12","Fentes marchées 3×10","Pompes 2×15"]},
-
-  {"type":"course","description":"1 min course / 2 min marche ×6","exercices":[]},
-  {"type":"marche-poids","description":"Marche 6 km","poids":"12 kg","exercices":[]},
-  {"type":"gym","description":"Renfo haut du corps","poids":"—","exercices":["Pompes 3×20","Rowing haltères 3×10","Planche 3×45s"]},
-
-  {"type":"course","description":"3 min course / 1 min marche ×5","exercices":[]},
-  {"type":"marche-poids","description":"Marche 8 km","poids":"15 kg","exercices":[]},
-  {"type":"gym","description":"Core & Gainage","poids":"—","exercices":["Planche 3×1min","Crunchs 3×20","Dips 3×10"]},
-
-  {"type":"course","description":"5 min course / 1 min marche ×4","exercices":[]},
-  {"type":"marche-poids","description":"Marche 10 km","poids":"15 kg","exercices":[]},
-  {"type":"gym","description":"Test deadlift","poids":"—","exercices":["Soulevé de terre 3×8","Farmer's walk 3×40m","Pompes 3×20"]},
-
-  {"type":"course","description":"10 min course continue","exercices":[]},
-  {"type":"marche-poids","description":"Marche 5 km","poids":"—","exercices":[]},
-  {"type":"gym","description":"Test force bras","poids":"—","exercices":["Traction horizontale 3×10","Pompes 4×15","Planche latérale 3×30s"]},
-
-  {"type":"course","description":"Marche rapide 5 km","exercices":[]},
-  {"type":"course","description":"Course finale 7 km","exercices":[]},
-  {"type":"repos","description":"Repos complet","exercices":[]}
+  {"type":"marche-poids","description":"Marche 5 km","exercices":[],"poids":"10 kg"},
+  {"type":"gym","description":"Renforcement bas du corps","exercices":["Squats 3×12","Fentes marchées 3×10","Pompes 2×15"],"poids":"—"},
+  {"type":"course","description":"1 min course / 2 min marche ×6","exercices":[],"poids":"—"},
+  {"type":"marche-poids","description":"Marche 6 km","exercices":[],"poids":"12 kg"},
+  {"type":"gym","description":"Renforcement haut du corps","exercices":["Pompes 3×20","Rowing haltères 3×10","Planche 3×45s"],"poids":"—"},
+  {"type":"course","description":"3 min course / 1 min marche ×5","exercices":[],"poids":"—"}
 ]
