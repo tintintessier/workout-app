@@ -4,11 +4,7 @@
   --primary: #0d47a1;
   --card: #ffffff;
 }
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body, html {
   height: 100%;
   font-family: 'Roboto', sans-serif;
@@ -28,8 +24,7 @@ main {
   overflow: hidden;
   position: relative;
 }
-
-/* Jour / journée */
+/* Séances – carte full-page */
 .day-nav {
   display: flex;
   justify-content: center;
@@ -50,7 +45,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--bg);
   padding: 1em;
 }
 .session-card {
