@@ -1,1 +1,32 @@
-body { font-family: sans-serif; background-color: #d0ebff; color: #003366; padding: 20px; }
+
+body {
+  font-family: sans-serif;
+  background-color: #e6f0ff;
+  color: #003366;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background-color: #0077cc;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+nav button {
+  margin: 0.3em;
+  padding: 0.5em 1em;
+  border: none;
+  background-color: #005fa3;
+  color: white;
+  border-radius: 8px;
+}
+.tab { display: none; padding: 1em; }
+.tab.active { display: block; }
+ul { list-style: none; padding: 0; }
+ul li {
+  background: white;
+  margin: 0.5em 0;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}

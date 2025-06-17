@@ -1,3 +1,52 @@
 [
-  { "nom": "Bol de quinoa", "ingredients": ["quinoa", "pois chiches", "avocat", "tomates"] }
+  {
+    "nom": "Poulet grillé et quinoa",
+    "ingredients": [
+      "Blancs de poulet",
+      "Quinoa",
+      "Légumes verts",
+      "Citron",
+      "Huile d'olive"
+    ]
+  },
+  {
+    "nom": "Saumon au four et riz brun",
+    "ingredients": [
+      "Filet de saumon",
+      "Riz brun",
+      "Brocoli",
+      "Ail",
+      "Poivre noir"
+    ]
+  },
+  {
+    "nom": "Tofu sauté aux légumes",
+    "ingredients": [
+      "Tofu ferme",
+      "Poivrons",
+      "Brocoli",
+      "Sauce soya",
+      "Gingembre"
+    ]
+  },
+  {
+    "nom": "Bol smoothie déjeuner",
+    "ingredients": [
+      "Yogourt grec",
+      "Banane",
+      "Fruits rouges",
+      "Avoine",
+      "Graines de chia"
+    ]
+  },
+  {
+    "nom": "Wrap dinde et houmous",
+    "ingredients": [
+      "Tortilla blé entier",
+      "Tranches de dinde",
+      "Houmous",
+      "Épinards",
+      "Tomates"
+    ]
+  }
 ]

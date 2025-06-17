@@ -1,4 +1,74 @@
 [
-  { "jour": 1, "type": "marche", "description": "5 min marche rapide, 1 min course x5" },
-  { "jour": 2, "type": "repos", "description": "Repos actif ou étirements" }
+  {
+    "type": "course",
+    "description": "1 min course / 2 min marche x6"
+  },
+  {
+    "type": "course",
+    "description": "2 min course / 2 min marche x5"
+  },
+  {
+    "type": "repos",
+    "description": "Repos actif"
+  },
+  {
+    "type": "course",
+    "description": "3 min course / 2 min marche x4"
+  },
+  {
+    "type": "course",
+    "description": "5 min course / 3 min marche x3"
+  },
+  {
+    "type": "repos",
+    "description": "Repos actif"
+  },
+  {
+    "type": "course",
+    "description": "8 min course / 2 min marche x2"
+  },
+  {
+    "type": "course",
+    "description": "10 min course / 2 min marche x2"
+  },
+  {
+    "type": "repos",
+    "description": "Repos actif"
+  },
+  {
+    "type": "course",
+    "description": "12 min course / 2 min marche x2"
+  },
+  {
+    "type": "course",
+    "description": "15 min course / 1 min marche"
+  },
+  {
+    "type": "repos",
+    "description": "Repos actif"
+  },
+  {
+    "type": "course",
+    "description": "20 min course continue"
+  },
+  {
+    "type": "gym",
+    "description": "Séance de gym"
+  },
+  {
+    "type": "repos",
+    "description": "Repos actif"
+  },
+  {
+    "type": "course",
+    "description": "25 min course"
+  },
+  {
+    "type": "gym",
+    "description": "Séance de gym + 10 min course"
+  },
+  {
+    "type": "course",
+    "description": "7 km course finale !"
+  }
 ]
