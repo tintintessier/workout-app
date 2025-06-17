@@ -99,3 +99,9 @@ main {
 .bottom-nav button.active {
   background: rgba(13,71,161,0.1);
 }
+
+#progressChart {
+  display: block;
+  width: 100% !important;
+  height: 250px !important;
+}
