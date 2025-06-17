@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnGraph = document.getElementById('btn-graph');
   const btnForce = document.getElementById('btn-force');
 
-  // Navigation
   btnSeances.addEventListener('click', () => showTab('seances'));
   btnGraph.addEventListener('click', () => showTab('graph'));
   btnForce.addEventListener('click', () => showTab('force'));
@@ -14,10 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(id).classList.add('active');
   }
 
-  let seances = [], completed = [];
-  let forceSessions = [];
+  let seances = [], completed = [], forceSessions = [];
 
-  // Charger séances course/marche/gym
+  // Charger séances progressives avec marches, courses et gym
   fetch('data/seances.json')
     .then(res => res.json())
     .then(data => {
@@ -28,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('Erreur séances:', err));
 
-  // Charger séances FORCE ciblées
+  // Charger séances FORCE
   fetch('data/force.json')
     .then(res => res.json())
     .then(data => {
@@ -60,12 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Chart.js pour progression
   let chart;
   function renderChart() {
     const ctx = document.getElementById('progressChart').getContext('2d');
     chart = new Chart(ctx, {
-      type: 'bar', data: {
+      type: 'bar',
+      data: {
         labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6'],
         datasets: [{ label: 'Séances complétées (%)', data: calculateWeeklyCompletion() }]
       }, options: { scales: { y: { beginAtZero: true, max: 100 } } }
@@ -81,3 +79,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateChartData() { if (chart) { chart.data.datasets[0].data = calculateWeeklyCompletion(); chart.update(); }}
 });
+
+/* data/seances.json */
+[
+  {"type":"marche","description":"Marche rapide 4 km"},
+  {"type":"marche-poids","description":"Marche 5 km avec sac 10 kg"},
+  {"type":"repos","description":"Repos actif ou étirements"},
+
+  {"type":"course","description":"1 min course / 2 min marche x6"},
+  {"type":"marche-poids","description":"Marche 6 km avec sac 12 kg"},
+  {"type":"repos","description":"Repos actif"},
+
+  {"type":"gym","description":"Séance gym: squats 3x10, fentes 3x12"},
+  {"type":"course","description":"3 min course / 1 min marche x5"},
+  {"type":"repos","description":"Repos"},
+
+  {"type":"course","description":"5 min course / 1 min marche x4"},
+  {"type":"marche-poids","description":"Marche 8 km avec sac 15 kg"},
+  {"type":"repos","description":"Repos"},
+
+  {"type":"gym","description":"Séance gym: soulevé de terre 3x8, planche 3x45s"},
+  {"type":"course","description":"10 min course continue"},
+  {"type":"repos","description":"Repos actif"},
+
+  {"type":"marche","description":"Marche rapide 5 km"},
+  {"type":"course","description":"7 km course finale"},
+  {"type":"repos","description":"Repos complet"}
+]
+
+/* data/force.json */
+[
+  {"exercice":"Soulevé de sac","details":"20 kg, 30 répétitions"},
+  {"exercice":"Traînée de sac","details":"40 kg, 40 m en moins de 51s"},
+  {"exercice":"Saut horizontal","details":"Atteindre 1,29 m minimum"},
+  {"exercice":"Navette chargée","details":"5 min 21 s ou moins avec 20 kg"}
+]
