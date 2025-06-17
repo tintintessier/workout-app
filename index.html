@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Train7k</title>
+  <title>Workout</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="manifest" href="manifest.json">
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
@@ -15,18 +15,19 @@
   </header>
 
   <main>
-    <!-- SÉANCES : carte quotidienne full-page -->
+    <!-- SÉANCES -->
     <section id="tab-seances" class="tab active">
       <div class="day-nav">
-        <button id="prev-day">«</button>
-        <span id="day-label">Jour 1</span>
-        <button id="next-day">»</button>
+        <button id="prev-day" aria-label="Jour précédent">«</button>
+        <span id="day-label">Semaine 1 • Jour 1</span>
+        <button id="next-day" aria-label="Jour suivant">»</button>
       </div>
       <div id="daily-card-container"></div>
     </section>
 
     <!-- PROGRESSION -->
     <section id="tab-progression" class="tab">
+      <h2>Progression</h2>
       <canvas id="progressChart"></canvas>
     </section>
 
@@ -51,11 +52,11 @@
   <nav class="bottom-nav">
     <button data-tab="seances" class="active">Séances</button>
     <button data-tab="progression">Progression</button>
-    <button data-tab="force">FORCE</button>
+    <button data-tab="force">Force</button>
   </nav>
 
   <script>
-    // Enregistre le service worker
+    // Enregistrement du service worker
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js');
     }
