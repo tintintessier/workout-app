@@ -4,59 +4,127 @@
   --primary: #0d47a1;
   --card: #ffffff;
 }
-/* reset */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body, html {
+  height: 100%;
   font-family: 'Roboto', sans-serif;
   background: var(--bg);
   color: var(--fg);
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
-header { background: var(--primary); color: #fff; padding: 1em; text-align: center; }
-main { flex: 1; overflow: hidden; position: relative; }
+header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+}
+main {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
 
-/* Carousel jour */
-.carousel-nav {
-  display: flex; justify-content: space-between; align-items: center;
+/* Jour / journée */
+.day-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
   padding: 1em;
 }
-.carousel-nav button {
-  background: none; border: none; font-size: 1.5em; color: var(--primary);
+.day-nav button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  color: var(--primary);
+  padding: 0 1em;
+  cursor: pointer;
 }
-#session-container {
-  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch; padding: 1em;
+#daily-card-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  padding: 1em;
 }
 .session-card {
-  flex: 0 0 80%; scroll-snap-align: start;
-  background: var(--card); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 1em; margin-right: 1em; position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  padding: 1.5em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: relative;
 }
-.session-card h3 { margin-bottom: .5em; }
-.session-card button { 
-  background: var(--primary); color: #fff; border: none;
-  padding: .5em 1em; border-radius: 4px; cursor: pointer;
-  position: absolute; bottom: 1em; right: 1em;
+.session-card h3 {
+  margin-bottom: 0.5em;
+  text-transform: capitalize;
+}
+.session-card p {
+  line-height: 1.4;
+  margin-bottom: 3em;
+}
+.session-card button {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Progression */
-#progressChart { display: block; width: 100% !important; height: 250px !important;
-  background: var(--card); margin: 1em; border-radius: 8px; }
+#progressChart {
+  display: block;
+  width: 100% !important;
+  height: 250px !important;
+  background: var(--card);
+  margin: 1em;
+  border-radius: 8px;
+}
 
 /* FORCE */
-#force-table { width:100%; border-collapse: collapse; margin: 1em; }
-#force-table th, #force-table td { border: 1px solid #ddd; padding: .5em; text-align:center; }
-#force-table th { background: var(--primary); color: #fff; }
+#force-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em;
+}
+#force-table th,
+#force-table td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: center;
+}
+#force-table th {
+  background: var(--primary);
+  color: #fff;
+}
 
-/* Nav fixe */
+/* Navigation fixe */
 .bottom-nav {
-  display: flex; justify-content: space-around;
-  background: #fff; border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  border-top: 1px solid #ccc;
 }
 .bottom-nav button {
-  flex:1; padding: .75em; background:none; border:none;
-  color: var(--primary); font-weight:bold; cursor:pointer;
+  flex: 1;
+  padding: 0.75em;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
 }
-.bottom-nav button.active { background: rgba(13,71,161,0.1); }
+.bottom-nav button.active {
+  background: rgba(13,71,161,0.1);
+}
