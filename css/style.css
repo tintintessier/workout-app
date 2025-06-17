@@ -1,12 +1,7 @@
 /* Masquer tous les onglets par défaut */
-.tab {
-  display: none;
-}
 
-/* Afficher uniquement l’onglet qui a la classe .active */
-.tab.active {
-  display: block;
-}
+.tab { display: none !important; }
+.tab.active { display: block !important; }
 
 :root {
   --bg: #fafbfc;
@@ -33,6 +28,7 @@ main {
   flex: 1;
   overflow: hidden;
   position: relative;
+  padding-bottom: 56px; /* ajuster si ta nav fait plus ou moins de 56 px de haut */
 }
 /* Séances – carte full-page */
 .day-nav {
@@ -115,10 +111,15 @@ main {
 
 /* Navigation fixe */
 .bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   background: #fff;
   border-top: 1px solid #ccc;
+  z-index: 1000;
 }
 .bottom-nav button {
   flex: 1;
