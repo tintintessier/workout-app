@@ -1,46 +1,38 @@
 [
   {
-    "exercice": "Soulevé de charge (sandbag) 20 kg",
-    "details": "30 répétitions en <3 minutes",
-    "description": "Simule le levage de cargaison. Place un sac de frappe de 20 kg à 1 m du sol et soulève-le 30 fois d'affilée, garde le dos droit, fléchis les hanches.",
-    "thresholds": {
-      "Bronze": "30 reps en ≤3:00",
-      "Argent": "30 reps en ≤2:30",
-      "Or": "30 reps en ≤2:00",
-      "Platine": "30 reps en ≤1:30"
+    "epreuve": "Soulevé de charge",
+    "niveaux": {
+      "Bronze": "30 levées en ≤ 3 min 30 s",
+      "Argent": "30 levées en ≤ 3 min (180 s)",
+      "Or":    "30 levées en ≤ 2 min 30 s (150 s)",
+      "Platine":"30 levées en ≤ 2 min (120 s)"
     }
   },
   {
-    "exercice": "Traînée de traîneau 40 kg",
-    "details": "40 m en <51 secondes",
-    "description": "Attache deux sacs totalisant 40 kg à un traîneau. Tire-le en marche arrière sur 20 m, fais demi-tour et refais 20 m. Garde le buste droit et utilise les épaules.",
-    "thresholds": {
-      "Bronze": "<51 s",
-      "Argent": "<45 s",
-      "Or": "<40 s",
-      "Platine": "<35 s"
+    "epreuve": "Traînée de charge (40 m)",
+    "niveaux": {
+      "Bronze": "≤ 51 s",
+      "Argent": "≤ 45 s",
+      "Or":     "≤ 40 s",
+      "Platine":"≤ 35 s"
     }
   },
   {
-    "exercice": "Saut horizontal",
-    "details": "Atteindre ≥1,29 m",
-    "description": "Debout, pieds parallèles, sans élan, saute en avant et mesure la distance du talon au talon. Entraîne la puissance des jambes.",
-    "thresholds": {
-      "Bronze": "≥1,29 m",
-      "Argent": "≥1,40 m",
-      "Or": "≥1,50 m",
-      "Platine": "≥1,60 m"
+    "epreuve": "Saut horizontal",
+    "niveaux": {
+      "Bronze": "≥ 129 cm",
+      "Argent": "≥ 140 cm",
+      "Or":     "≥ 150 cm",
+      "Platine":"≥ 160 cm"
     }
   },
   {
-    "exercice": "Course-navette 20 m chargé",
-    "details": "10 navettes (5 chargées) en ≤5 min 21 s",
-    "description": "Fais 10 allers-retours de 20 m, alterne sac de 20 kg pour 5 passages. Total 400 m en navettes.",
-    "thresholds": {
-      "Bronze": "≤5:21",
-      "Argent": "≤5:00",
-      "Or": "≤4:30",
-      "Platine": "≤4:00"
+    "epreuve": "Course-navette (400 m)",
+    "niveaux": {
+      "Bronze": "≤ 5 min 21 s",
+      "Argent": "≤ 4 min 45 s",
+      "Or":     "≤ 4 min 15 s",
+      "Platine":"≤ 3 min 45 s"
     }
   }
 ]
