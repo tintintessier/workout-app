@@ -7,8 +7,7 @@ const URLS = [
   './css/style.css',
   './js/app.js',
   './data/seances.json',
-  './data/force.json',
-  // Ajoute ici tous les fichiers d'assets (icônes, audio, etc.)
+  './data/force.json'
 ];
 
 self.addEventListener('install', e => {
