@@ -1,30 +1,101 @@
 :root {
-  --bg: #f8f9fa;
-  --card-bg: #ffffff;
-  --text: #333333;
-  --accent: #0056b3;
-  --border: #dddddd;
+  --bg: #f7f9fc;
+  --fg: #22303c;
+  --primary: #0d47a1;
+  --card: #ffffff;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Roboto', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 60px; }
-.header { background: var(--card-bg); box-shadow: 0 2px 4px rgba(0,0,0,0.05); padding: 0.75rem 1rem; text-align: center; }
-.logo { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
-.main { padding: 1rem; }
-.section-title { font-size: 1.3rem; margin-bottom: 0.75rem; }
-.week-controls { display: flex; justify-content: space-between; margin-bottom: 1rem; }
-.ctrl-btn { background: var(--accent); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
-.cards-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-.card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; }
-.card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--accent); }
-.card p { font-size: 0.95rem; margin-bottom: 0.5rem; }
-.card .exercise-list { list-style: none; padding-left: 0; margin-bottom: 0.5rem; }
-.card .exercise-list li { margin-bottom: 0.25rem; }
-.card .check { position: absolute; top: 0.75rem; right: 0.75rem; width: 20px; height: 20px; border: 2px solid var(--accent); border-radius: 4px; cursor: pointer; }
-.card.done { opacity: 0.6; }
-.chart-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex; flex-direction: column;
+  height: 100vh;
+}
+header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+}
+main {
+  flex: 1; overflow-y: auto;
+  padding: 1em;
+}
+.week-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.week-nav button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .tab { display: none; }
 .tab.active { display: block; }
-.footer { position: fixed; bottom: 0; width: 100%; background: var(--card-bg); border-top: 1px solid var(--border); }
-.bottom-nav { display: flex; justify-content: space-around; padding: 0.5rem 0; }
-.bottom-nav .nav-btn { background: none; border: none; font-size: 1rem; color: var(--text); cursor: pointer; }
-.bottom-nav .nav-btn.active { color: var(--accent); }
+
+/* Liste séances */
+#seance-list {
+  list-style: none;
+}
+#seance-list li {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+#seance-list input[type="checkbox"] {
+  margin-right: 0.75em;
+  width: 1.2em; height: 1.2em;
+}
+
+/* Graphique Progression */
+#progressChart {
+  max-width: 100%;
+  background: var(--card);
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Tableau FORCE */
+#force-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+#force-table th,
+#force-table td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: center;
+}
+#force-table th {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Navigation fixe */
+.bottom-nav {
+  display: flex; justify-content: space-around;
+  background: #fff; border-top: 1px solid #ccc;
+}
+.bottom-nav button {
+  flex: 1;
+  padding: 0.75em;
+  background: none; border: none;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+}
+.bottom-nav button.active {
+  background: rgba(13,71,161,0.1);
+}
