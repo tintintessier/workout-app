@@ -1,6 +1,22 @@
 [
-  {"exercice":"Soulevé de charge (sandbag) 20 kg","details":"30 répétitions en <3m"},
-  {"exercice":"Traînée de traîneau 40 kg","details":"40m en <51s"},
-  {"exercice":"Saut horizontal","details":"Atteindre ≥1,29 m"},
-  {"exercice":"Course-navette 20m chargé","details":"5m21s max"}
+  {
+    "exercice": "Soulevé de charge (sandbag) 20 kg",
+    "details": "30 répétitions en <3 minutes",
+    "description": "Simule le levage de cargaison. Place un sac de frappes de 20 kg à 1 m du sol et soulève-le 30 fois d'affilée, garde le dos droit, fléchis les hanches."
+  },
+  {
+    "exercice": "Traînée de traîneau 40 kg",
+    "details": "40 m en <51 secondes",
+    "description": "Attache deux sacs totalisant 40 kg à un traîneau. Tire-le en marche arrière sur 20 m, fais demi-tour et refais 20 m. Garde le buste droit et utilise les épaules."
+  },
+  {
+    "exercice": "Saut horizontal",
+    "details": "Atteindre ≥1,29 m",
+    "description": "Debout, pieds parallèles, sans élan, saute en avant et mesure la distance du talon au talon. Entraîne la puissance des jambes et le coordonné."
+  },
+  {
+    "exercice": "Course-navette 20 m chargé",
+    "details": "5 min 21 s max avec 20 kg",
+    "description": "Fais des allers-retours de 20 m, porte un sac de 20 kg sur le dos en alternance avec sans sac sur 10 navettes (20m)."
+  }
 ]
