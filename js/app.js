@@ -1,116 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('.tab');
-  const btnSeances = document.getElementById('btn-seances');
-  const btnGraph = document.getElementById('btn-graph');
-  const btnForce = document.getElementById('btn-force');
+  const tabs = { seances: document.getElementById('seances'), graph: document.getElementById('graph'), force: document.getElementById('force') };
+  document.getElementById('btn-seances').onclick = () => showTab('seances');
+  document.getElementById('btn-graph').onclick = () => showTab('graph');
+  document.getElementById('btn-force').onclick = () => showTab('force');
+  function showTab(id) { Object.values(tabs).forEach(t => t.classList.remove('active')); tabs[id].classList.add('active'); }
 
-  btnSeances.addEventListener('click', () => showTab('seances'));
-  btnGraph.addEventListener('click', () => showTab('graph'));
-  btnForce.addEventListener('click', () => showTab('force'));
+  let seances = [], forceSessions = [], completed = [];
+  let currentWeek = 1, weeksCount = 6;
+  const perWeek = 3;
 
-  function showTab(id) {
-    sections.forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  document.getElementById('prev-week').onclick = () => changeWeek(-1);
+  document.getElementById('next-week').onclick = () => changeWeek(1);
+
+  function changeWeek(delta) {
+    currentWeek = Math.min(weeksCount, Math.max(1, currentWeek + delta));
+    document.getElementById('current-week-label').textContent = `Semaine ${currentWeek}`;
+    renderSeances();
   }
 
-  let seances = [], completed = [], forceSessions = [];
+  fetch('data/seances.json').then(r=>r.json()).then(data=>{
+    seances = data; completed = Array(seances.length).fill(false);
+    renderSeances(); renderChart();
+  });
 
-  // Charger séances progressives avec marches, courses et gym
-  fetch('data/seances.json')
-    .then(res => res.json())
-    .then(data => {
-      seances = data;
-      completed = new Array(seances.length).fill(false);
-      renderSeances();
-      renderChart();
-    })
-    .catch(err => console.error('Erreur séances:', err));
-
-  // Charger séances FORCE
-  fetch('data/force.json')
-    .then(res => res.json())
-    .then(data => {
-      forceSessions = data;
-      renderForce();
-    })
-    .catch(err => console.error('Erreur FORCE:', err));
+  fetch('data/force.json').then(r=>r.json()).then(data=>{ forceSessions = data; renderForce(); });
 
   function renderSeances() {
-    const list = document.getElementById('seance-list');
-    list.innerHTML = '';
-    seances.forEach((s, i) => {
-      const li = document.createElement('li');
-      const cb = document.createElement('input');
-      cb.type = 'checkbox'; cb.checked = completed[i];
-      cb.addEventListener('change', () => { completed[i] = cb.checked; updateChartData(); });
-      li.append(cb, document.createTextNode(` Jour ${i+1} [${s.type}] – ${s.description}`));
-      list.appendChild(li);
+    const container = document.getElementById('seance-cards'); container.innerHTML = '';
+    const start = (currentWeek-1)*perWeek, end = start+perWeek;
+    seances.slice(start,end).forEach((s,i)=>{
+      const card = document.createElement('div'); card.className='card';
+      const title = document.createElement('h3'); title.textContent = `Jour ${start+i+1}: ${s.type}`;
+      const desc = document.createElement('p'); desc.textContent = s.description;
+      if(s.type==='gym'){
+        const exo = document.createElement('p'); exo.innerHTML=`<strong>Exercices :</strong> ${s.exercices.join(', ')}`;
+        card.append(title, desc, exo);
+      } else if(s.type==='marche-poids'){
+        const w = document.createElement('p'); w.innerHTML=`<strong>Poids recommandé :</strong> ${s.poids}`;
+        card.append(title, desc, w);
+      } else {
+        card.append(title, desc);
+      }
+      container.appendChild(card);
     });
   }
 
   function renderForce() {
-    const list = document.getElementById('force-list');
-    list.innerHTML = '';
-    forceSessions.forEach((f, i) => {
-      const li = document.createElement('li');
-      li.textContent = `Ex ${i+1}: ${f.exercice} – ${f.details}`;
-      list.appendChild(li);
+    const container = document.getElementById('force-cards'); container.innerHTML = '';
+    forceSessions.forEach((f,i)=>{
+      const card = document.createElement('div'); card.className='card';
+      card.innerHTML=`<h3>Ex ${i+1}: ${f.exercice}</h3><p>${f.details}</p>`;
+      container.appendChild(card);
     });
   }
 
   let chart;
-  function renderChart() {
-    const ctx = document.getElementById('progressChart').getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Sem 1','Sem 2','Sem 3','Sem 4','Sem 5','Sem 6'],
-        datasets: [{ label: 'Séances complétées (%)', data: calculateWeeklyCompletion() }]
-      }, options: { scales: { y: { beginAtZero: true, max: 100 } } }
+  function renderChart(){
+    const ctx=document.getElementById('progressChart').getContext('2d');
+    chart=new Chart(ctx,{type:'bar',data:{labels:Array.from({length:weeksCount},(_,i)=>`Sem ${i+1}`),datasets:[{label:'Complétion (%)',data:calcCompletion()}]},options:{scales:{y:{beginAtZero:true,max:100}}}});
+  }
+
+  function calcCompletion(){
+    return Array.from({length:weeksCount},(_,w)=>{
+      const weekData=seances.slice(w*perWeek,(w+1)*perWeek);
+      const done=weekData.filter((_,i)=>completed[w*perWeek+i]).length;
+      return Math.round(done/perWeek*100);
     });
   }
 
-  function calculateWeeklyCompletion() {
-    const perWeek = Math.ceil(seances.length / 6);
-    const counts = new Array(6).fill(0);
-    seances.forEach((_, i) => { const week = Math.floor(i / perWeek); if (completed[i]) counts[week]++; });
-    return counts.map(cnt => Math.round(cnt / perWeek * 100));
-  }
-
-  function updateChartData() { if (chart) { chart.data.datasets[0].data = calculateWeeklyCompletion(); chart.update(); }}
 });
 
 /* data/seances.json */
 [
-  {"type":"marche","description":"Marche rapide 4 km"},
-  {"type":"marche-poids","description":"Marche 5 km avec sac 10 kg"},
-  {"type":"repos","description":"Repos actif ou étirements"},
+  {"type":"marche","description":"Marche rapide 4 km","exercices":[],"poids":"—"},
+  {"type":"marche-poids","description":"Marche 5 km","poids":"10 kg","exercices":[]},
+  {"type":"gym","description":"Renfo bas du corps","poids":"—","exercices":["Squats 3×12","Fentes marchées 3×10","Pompes 2×15"]},
 
-  {"type":"course","description":"1 min course / 2 min marche x6"},
-  {"type":"marche-poids","description":"Marche 6 km avec sac 12 kg"},
-  {"type":"repos","description":"Repos actif"},
+  {"type":"course","description":"1 min course / 2 min marche ×6","exercices":[]},
+  {"type":"marche-poids","description":"Marche 6 km","poids":"12 kg","exercices":[]},
+  {"type":"gym","description":"Renfo haut du corps","poids":"—","exercices":["Pompes 3×20","Rowing haltères 3×10","Planche 3×45s"]},
 
-  {"type":"gym","description":"Séance gym: squats 3x10, fentes 3x12"},
-  {"type":"course","description":"3 min course / 1 min marche x5"},
-  {"type":"repos","description":"Repos"},
+  {"type":"course","description":"3 min course / 1 min marche ×5","exercices":[]},
+  {"type":"marche-poids","description":"Marche 8 km","poids":"15 kg","exercices":[]},
+  {"type":"gym","description":"Core & Gainage","poids":"—","exercices":["Planche 3×1min","Crunchs 3×20","Dips 3×10"]},
 
-  {"type":"course","description":"5 min course / 1 min marche x4"},
-  {"type":"marche-poids","description":"Marche 8 km avec sac 15 kg"},
-  {"type":"repos","description":"Repos"},
+  {"type":"course","description":"5 min course / 1 min marche ×4","exercices":[]},
+  {"type":"marche-poids","description":"Marche 10 km","poids":"15 kg","exercices":[]},
+  {"type":"gym","description":"Test deadlift","poids":"—","exercices":["Soulevé de terre 3×8","Farmer's walk 3×40m","Pompes 3×20"]},
 
-  {"type":"gym","description":"Séance gym: soulevé de terre 3x8, planche 3x45s"},
-  {"type":"course","description":"10 min course continue"},
-  {"type":"repos","description":"Repos actif"},
+  {"type":"course","description":"10 min course continue","exercices":[]},
+  {"type":"marche-poids","description":"Marche 5 km","poids":"—","exercices":[]},
+  {"type":"gym","description":"Test force bras","poids":"—","exercices":["Traction horizontale 3×10","Pompes 4×15","Planche latérale 3×30s"]},
 
-  {"type":"marche","description":"Marche rapide 5 km"},
-  {"type":"course","description":"7 km course finale"},
-  {"type":"repos","description":"Repos complet"}
+  {"type":"course","description":"Marche rapide 5 km","exercices":[]},
+  {"type":"course","description":"Course finale 7 km","exercices":[]},
+  {"type":"repos","description":"Repos complet","exercices":[]}
 ]
 
 /* data/force.json */
 [
-  {"exercice":"Soulevé de sac","details":"20 kg, 30 répétitions"},
-  {"exercice":"Traînée de sac","details":"40 kg, 40 m en moins de 51s"},
-  {"exercice":"Saut horizontal","details":"Atteindre 1,29 m minimum"},
-  {"exercice":"Navette chargée","details":"5 min 21 s ou moins avec 20 kg"}
+  {"exercice":"Soulevé de charge (sandbag) 20 kg","details":"30 répétitions en <3m"},
+  {"exercice":"Traînée de traîneau 40 kg","details":"40m en <51s"},
+  {"exercice":"Saut horizontal","details":"Atteindre ≥1,29 m"},
+  {"exercice":"Course-navette 20m chargé","details":"5m21s max"}
 ]
