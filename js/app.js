@@ -1,136 +1,116 @@
-// js/app.js
-
-let seancesParSemaine = [];
-let semaineCourante = Number(localStorage.getItem('train7k_sem')) || 0;
-const totalSemaines = 6;
+// séance day-by-day + PWA + voice + chart + FORCE
+let dataSeances = [], dataForce = [];
+let semaineCourante = Number(localStorage.getItem('train7k_week'))||0;
+let jourCourant   = Number(localStorage.getItem('train7k_day'))||0;
+const joursParSemaine = 7, semMax = 6;
 let chart;
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Navigation en bas
-  document.querySelectorAll('.bottom-nav button').forEach(btn => {
-    btn.addEventListener('click', () => selectTab(btn.dataset.tab));
+document.addEventListener('DOMContentLoaded', ()=>{
+  // nav onglets
+  document.querySelectorAll('.bottom-nav button').forEach(b=>{
+    b.addEventListener('click', ()=>selectTab(b.dataset.tab));
   });
   selectTab('seances');
 
-  // Boutons Préc / Suiv semaine
-  document.getElementById('prev-week').addEventListener('click', () => changeWeek(-1));
-  document.getElementById('next-week').addEventListener('click', () => changeWeek(1));
+  // butons jour
+  document.getElementById('prev-day').addEventListener('click', ()=>changeDay(-1));
+  document.getElementById('next-day').addEventListener('click', ()=>changeDay(1));
 
-  // Initialiser Chart.js
   initChart();
-
-  // Charger séances
   fetch('data/seances.json')
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => {
-      seancesParSemaine = data;
-      renderSemaine();
-      updateChart();  // assure la première mise à jour
-    })
-    .catch(err => {
-      console.error('Erreur seances.json', err);
-      document.getElementById('seance-list').innerHTML =
-        '<li style="color:red">Impossible de charger les séances.</li>';
-    });
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>{ dataSeances=d; renderDay(); updateChart(); })
+    .catch(()=>{ document.getElementById('session-container').innerHTML=
+      '<p style="color:red;padding:1em">Impossible de charger séances.</p>'; });
 
-  // Charger FORCE
   fetch('data/force.json')
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .then(data => populateForceTable(data))
-    .catch(err => {
-      console.error('Erreur force.json', err);
-      document.querySelector('#force-table tbody').innerHTML =
-        '<tr><td colspan="5" style="color:red">Impossible de charger FORCE.</td></tr>';
-    });
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>populateForce(d))
+    .catch(()=>{/* erreur FORCE */});
 });
 
-function selectTab(name) {
-  // masquer/afficher les onglets
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(`tab-${name}`).classList.add('active');
-  // mettre à jour la nav
-  document.querySelectorAll('.bottom-nav button').forEach(b => b.classList.remove('active'));
-  document.querySelector(`[data-tab="${name}"]`).classList.add('active');
-  // si on passe à Progression, forcer le redimensionnement du chart
-  if (name === 'progression' && chart) {
-    chart.resize();
-    chart.update();
-  }
+// change d’onglet
+function selectTab(n){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`[data-tab="${n}"]`).classList.add('active');
+  if(n==='progression'){ chart.resize(); chart.update(); }
 }
 
-function changeWeek(delta) {
-  semaineCourante = Math.min(totalSemaines - 1, Math.max(0, semaineCourante + delta));
-  localStorage.setItem('train7k_sem', semaineCourante);
-  renderSemaine();
+// jour précédent / suivant
+function changeDay(delta){
+  const maxDay = dataSeances[semaineCourante].length-1;
+  jourCourant = Math.min(maxDay, Math.max(0, jourCourant+delta));
+  localStorage.setItem('train7k_day', jourCourant);
+  renderDay();
 }
 
-function renderSemaine() {
-  document.getElementById('week-label').textContent = `Semaine ${semaineCourante + 1}`;
-  const ul = document.getElementById('seance-list');
-  ul.innerHTML = '';
-  seancesParSemaine[semaineCourante].forEach((s, i) => {
-    const done = JSON.parse(localStorage.getItem(`train7k_${semaineCourante}_${i}`)) || false;
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <input type="checkbox" id="c${semaineCourante}_${i}" ${done ? 'checked' : ''}>
-      <label for="c${semaineCourante}_${i}">
-        ${s.type.toUpperCase()} – ${s.description}
-      </label>
-    `;
-    ul.appendChild(li);
-    li.querySelector('input').addEventListener('change', e => {
-      localStorage.setItem(`train7k_${semaineCourante}_${i}`, e.target.checked);
-      updateChart();
-    });
-  });
-  updateChart();
+// affiche la carte du jour
+function renderDay(){
+  const s = dataSeances[semaineCourante][jourCourant];
+  document.getElementById('day-label').textContent =
+    `Sem ${semaineCourante+1} • Jour ${jourCourant+1}`;
+  const cont = document.getElementById('session-container');
+  cont.innerHTML = `
+    <div class="session-card">
+      <h3>${capitalize(s.type)}</h3>
+      <p>${s.description.replace(/\n/g,'<br>')}</p>
+      <button id="start-btn">Démarrer séance</button>
+    </div>`;
+  document.getElementById('start-btn').addEventListener('click', startSession(s));
 }
 
-function initChart() {
+// Start séance → voice + vibration
+function startSession(s){
+  return ()=> {
+    const utter = new SpeechSynthesisUtterance(
+      `Démarrage de la séance. ${s.description.replace(/\n/g,'. ')}`
+    );
+    utter.lang = 'fr-FR';
+    speechSynthesis.speak(utter);
+    navigator.vibrate?.(200);
+  };
+}
+
+// Init Chart.js
+function initChart(){
   const ctx = document.getElementById('progressChart').getContext('2d');
-  chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: Array.from({ length: totalSemaines }, (_, i) => `S${i + 1}`),
-      datasets: [{
-        label: '% complété',
-        data: Array(totalSemaines).fill(0),
-        backgroundColor: 'rgba(13,71,161,0.6)'
-      }]
+  chart = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:Array.from({length:semMax},(_,i)=>`S${i+1}`),
+      datasets:[{label:'% complété',data:Array(semMax).fill(0),backgroundColor:'rgba(13,71,161,0.6)'}]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: { y: { beginAtZero: true, max: 100 } }
-    }
+    options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:100}}}
   });
 }
 
-function updateChart() {
-  if (!seancesParSemaine.length) return;
-  const data = seancesParSemaine.map((sem, si) => {
-    const total = sem.length;
-    const doneCount = sem.reduce((a, _, i) =>
-      a + (JSON.parse(localStorage.getItem(`train7k_${si}_${i}`)) ? 1 : 0), 0);
-    return Math.round(doneCount / total * 100);
+// Met à jour Chart
+function updateChart(){
+  if(!dataSeances.length) return;
+  const d = dataSeances.map((sem,si)=>{
+    const done = sem.reduce((acc,s,i)=>acc+(JSON.parse(localStorage.getItem(`train7k_${si}_${i}`))?1:0),0);
+    return Math.round(done/sem.length*100);
   });
-  console.log('Données progression par semaine:', data);
-  chart.data.datasets[0].data = data;
-  chart.update();
+  chart.data.datasets[0].data = d; chart.update();
 }
 
-function populateForceTable(data) {
+// Remplir FORCE
+function populateForce(d){
   const tbody = document.querySelector('#force-table tbody');
-  tbody.innerHTML = '';
-  data.forEach(f => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+  tbody.innerHTML='';
+  d.forEach(f=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`
       <td>${f.epreuve}</td>
       <td>${f.niveaux.Bronze}</td>
       <td>${f.niveaux.Argent}</td>
       <td>${f.niveaux.Or}</td>
-      <td>${f.niveaux.Platine}</td>
-    `;
+      <td>${f.niveaux.Platine}</td>`;
     tbody.appendChild(tr);
   });
 }
+
+// utils
+function capitalize(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
